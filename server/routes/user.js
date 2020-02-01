@@ -4,8 +4,7 @@ const UserController = require("../controllers/user");
 
 const router = express.Router();
 
-router.post("/movie", UserController.createMovie);
-router.put("/movie/:id", UserController.updateMovie);
-router.delete("/movie/:id", UserController.deleteMovie);
-router.get("/movie/:id", UserController.getMovieById);
-router.get("/movies", UserController.getMovies);
+router.post("/register", UserController.register);
+router.post("/login", UserController.login);
+
+module.exports = router;

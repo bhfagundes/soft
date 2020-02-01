@@ -1,5 +1,3 @@
-import Links from "./Links";
-import Logo from "./Logo";
-import NavBar from "./NavBar";
+import Login from "./containers/Login";
 
-export { Links, Logo, NavBar };
+export { Login };

@@ -1,14 +1,14 @@
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 
-import { NavBar } from "../components";
-
+import Login from "../containers/Login";
+import Login2 from "../components/auth/Login";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
     <Router>
-      <NavBar />
+      <Login2 />
     </Router>
   );
 }

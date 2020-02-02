@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const db = require("./db");
-const userRouter = require("./routes/user");
+const routesRouter = require("./routes/routes");
 
 const app = express();
 const apiPort = 3000;
@@ -18,6 +18,6 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.use("/api", userRouter);
+app.use("/api", routesRouter);
 
 app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`));

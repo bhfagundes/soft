@@ -1,12 +1,18 @@
 const express = require("express");
-
+const router = express.Router();
 const UserController = require("../controllers/user");
 const CategorieController = require("../controllers/categorie");
-const router = express.Router();
+const ProjectController = require("../controllers/project");
+const TaskController = require("../controllers/task");
 
 router.post("/register", UserController.register);
 router.post("/login", UserController.login);
 router.get("/users", UserController.getUsers);
 router.post("/categorie/create", CategorieController.createCategorie);
 router.get("/categories", CategorieController.getCategories);
+router.get("/projects", ProjectController.getProjects);
+router.get("/projects/:id", ProjectController.getProjects);
+router.post("/projects/create", ProjectController.createProject);
+router.post("/task/create", TaskController.createTask);
+
 module.exports = router;

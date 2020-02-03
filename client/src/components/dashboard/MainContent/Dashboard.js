@@ -35,32 +35,37 @@ class Dashboard extends Component {
 
   render() {
     const { projects } = this.props.projects;
-
+    var teste = Object.values(projects);
+    teste = teste[1];
+    let projectData;
     let content;
+    if (typeof teste != "undefined") {
+      var teste2 = Object.values(teste);
+      console.log(teste2[0]._id);
 
-    let projectData = projects.sort().map(project => (
-      <div
-        key={project._id}
-        className="project-icon"
-        onClick={() => this.props.history.push(`/projects/${project._id}`)}
-      >
-        <div className="project-name">{project.name}</div>
+      projectData = teste2.sort().map(project => (
         <div
-          className="project-info-button"
-          onClick={this.toggleEditModal.bind(
-            this,
-            project.name,
-            project.teamMembers,
-            project._id,
-            project.owner
-          )}
+          key={project._id}
+          className="project-icon"
+          onClick={() => this.props.history.push(`/projects/${project._id}`)}
         >
-          Edit project
+          <div className="project-name">{project.name}</div>
+          <div
+            className="project-info-button"
+            onClick={this.toggleEditModal.bind(
+              this,
+              project.name,
+              project.teamMembers,
+              project._id,
+              project.owner
+            )}
+          >
+            Edit project
+          </div>
+          <div className="project-info-button">Go to project</div>
         </div>
-        <div className="project-info-button">Go to project</div>
-      </div>
-    ));
-
+      ));
+    }
     if (projects.length > 0) {
       // At least one project
       content = (
@@ -88,9 +93,9 @@ class Dashboard extends Component {
         <>
           <div className="projects">
             <div className="no-projects">
-              <h1 className="header">You have no projects</h1>
+              <h1 className="header">Nenhuma tarefa cadastrada!</h1>
               <button className="main-btn" onClick={this.toggleModal}>
-                Create your first project
+                Criar tarefa
               </button>
               <div className="modal-wrapper">
                 <Modal onClose={this.toggleModal} modal={this.state.modal} />

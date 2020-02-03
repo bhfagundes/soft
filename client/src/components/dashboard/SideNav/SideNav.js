@@ -28,13 +28,23 @@ class SideNav extends Component {
 
   render() {
     const { projects } = this.props.projects;
+    //console.log(Object.values(projects.data));
+    //console.log(projects.keys());
+    //console.log(Object.entries(projects));
 
-    let projectData = projects.sort().map(project => (
-      <li className="project-listing" key={project._id}>
-        <Link to={`/projects/${project._id}`}>{project.name}</Link>
-      </li>
-    ));
+    var teste = Object.values(projects);
+    teste = teste[1];
+    let projectData;
+    if (typeof teste != "undefined") {
+      var teste2 = Object.values(teste);
+      console.log(teste2[0]._id);
 
+      projectData = teste2.map(project => (
+        <li className="project-listing" key={project._id}>
+          <Link to={`/projects/${project._id}`}>{project.name}</Link>
+        </li>
+      ));
+    }
     return (
       <nav className="side">
         <ul className="top">
@@ -51,13 +61,13 @@ class SideNav extends Component {
               <i className="material-icons icon">home</i>Home
             </li>
           </NavLink>
-          {/*
-          <NavLink exact activeClassName="active-page" to="/tasks">
-            <li>
-              <i className="material-icons icon">check_circle</i>My Tasks
-            </li>
-          </NavLink>
-          */}
+          {
+            <NavLink exact activeClassName="active-page" to="/tasks">
+              <li>
+                <i className="material-icons icon">check_circle</i>My Tasks
+              </li>
+            </NavLink>
+          }
           <div className="sign-out" onClick={this.onLogoutClick}>
             <li>
               <i className="material-icons icon">arrow_back</i>Sign Out

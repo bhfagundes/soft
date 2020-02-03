@@ -31,7 +31,24 @@ class Layout extends Component {
     let dashboardContent;
 
     if (projects === null || projectsLoading) {
-      dashboardContent = <Spinner />;
+      dashboardContent = (
+        <>
+          <SideNav />
+          <div className="right">
+            <TopNav />
+            <Switch>
+              <Route
+                exact
+                path="/dashboard"
+                projects={[]}
+                component={Dashboard}
+              />
+              <Route exact path="/tasks" component={Tasks} />
+              <Route component={NotFound} />
+            </Switch>
+          </div>
+        </>
+      );
     } else if (projects.length > 0) {
       dashboardContent = (
         <>

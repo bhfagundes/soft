@@ -35,15 +35,15 @@ class Dashboard extends Component {
 
   render() {
     const { projects } = this.props.projects;
-    var teste = Object.values(projects);
-    teste = teste[1];
-    let projectData;
+    let tamanho = 0;
     let content;
-    if (typeof teste != "undefined") {
-      var teste2 = Object.values(teste);
-      console.log(teste2[0]._id);
+    let projects_aux = Object.values(projects);
+    let projectData = "";
+    if (projects_aux[0] === true) {
+      tamanho = projects_aux[1].length;
+      console.log(projects_aux[1][0].name);
 
-      projectData = teste2.sort().map(project => (
+      projectData = projects_aux[1].sort().map(project => (
         <div
           key={project._id}
           className="project-icon"
@@ -55,9 +55,8 @@ class Dashboard extends Component {
             onClick={this.toggleEditModal.bind(
               this,
               project.name,
-              project.teamMembers,
-              project._id,
-              project.owner
+              project.description,
+              project._id
             )}
           >
             Edit project
@@ -66,7 +65,7 @@ class Dashboard extends Component {
         </div>
       ));
     }
-    if (projects.length > 0) {
+    if (tamanho > 0) {
       // At least one project
       content = (
         <>
@@ -93,9 +92,9 @@ class Dashboard extends Component {
         <>
           <div className="projects">
             <div className="no-projects">
-              <h1 className="header">Nenhuma tarefa cadastrada!</h1>
+              <h1 className="header">You have no projects</h1>
               <button className="main-btn" onClick={this.toggleModal}>
-                Criar tarefa
+                Create your first project
               </button>
               <div className="modal-wrapper">
                 <Modal onClose={this.toggleModal} modal={this.state.modal} />

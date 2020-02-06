@@ -8,11 +8,12 @@ const TaskController = require("../controllers/task");
 router.post("/register", UserController.register);
 router.post("/login", UserController.login);
 router.get("/users", UserController.getUsers);
-router.post("/categorie/create", CategorieController.createCategorie);
+router.post("/categories/create", CategorieController.createCategorie);
 router.get("/categories", CategorieController.getCategories);
 router.get("/projects", ProjectController.getProjects);
 router.get("/projects/:id", ProjectController.getProjects);
 router.post("/projects/create", ProjectController.createProject);
 router.post("/task/create", TaskController.createTask);
+router.get("/tasks/:id", TaskController.getTask);
 
 module.exports = router;

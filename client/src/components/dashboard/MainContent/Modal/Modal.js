@@ -242,11 +242,6 @@ class Modal extends Component {
       const { name, email } = this.props.auth.user;
 
       // Assignee dropdown in Modal
-      let membersOptions = teamMembers.map((member, index) => (
-        <option key={index} value={member.email}>
-          {member.name}
-        </option>
-      ));
 
       // Due date dropdown in Modal
       const MONTHS = new Array(12).fill(1);
@@ -288,22 +283,6 @@ class Modal extends Component {
           </div>
           <div className="form-group">
             <div className="split">
-              <label>
-                <div className="form-label">Assignee</div>
-                <select
-                  onChange={this.onSelectChange}
-                  value={this.state.assignee}
-                  id="assignee"
-                  type="text"
-                  className="form-input task-input-split"
-                >
-                  <option disabled value="">
-                    Assign to
-                  </option>
-                  <option value={email}>{name + " (You)"}</option>
-                  {membersOptions}
-                </select>
-              </label>
               <label>
                 <div className="form-label">Due Date</div>
                 <div className="split">
@@ -503,15 +482,14 @@ class Modal extends Component {
 
     // Edit project modal
     else if (this.props.edit) {
+      console.log(this.state);
       return (
         <div className="modal">
           <span className="close-modal" onClick={this.onClose}>
             &times;
           </span>
           <h1 className="header">Edit Project Info</h1>
-          <p className="created-by">
-            Created by {this.props.owner.name} ({this.props.owner.email})
-          </p>
+
           <div className="form-group">
             <label>
               <div className="form-label">Project Name (required)</div>
@@ -526,49 +504,6 @@ class Modal extends Component {
             </label>
           </div>
           <div className="form-label">Add team members (optional)</div>
-          <button className="main-btn add-members" onClick={this.addMember}>
-            Add another member
-          </button>
-          <div className="members-edit">
-            {members.map((val, id) => {
-              let memberId = `member-${id}`,
-                emailId = `email-${id}`;
-              return (
-                <div className="split" key={id}>
-                  <label className="form-label" htmlFor={memberId}>
-                    Name (required for teams)
-                    <input
-                      type="text"
-                      name="name"
-                      data-id={id}
-                      id={memberId}
-                      value={members[id].name}
-                      className="form-input"
-                      onChange={this.onChange}
-                    />
-                  </label>
-                  <label className="form-label split-email" htmlFor={emailId}>
-                    Email (required for teams)
-                    <input
-                      type="text"
-                      name="email"
-                      data-id={id}
-                      id={emailId}
-                      value={members[id].email}
-                      className="form-input"
-                      onChange={this.onChange}
-                    />
-                  </label>
-                  <span
-                    className="delete"
-                    onClick={this.deleteMember.bind(this, id)}
-                  >
-                    REMOVE
-                  </span>
-                </div>
-              );
-            })}
-          </div>
           <div>
             <button
               className="main-btn update-project"
@@ -576,14 +511,13 @@ class Modal extends Component {
             >
               Update Project
             </button>
-            {this.props.owner.id === this.props.auth.user.id ? (
-              <button
-                className="main-btn delete-project"
-                onClick={this.deleteProject.bind(this, this.props.id)}
-              >
-                Delete Project
-              </button>
-            ) : null}
+
+            <button
+              className="main-btn delete-project"
+              onClick={this.deleteProject.bind(this, this.props.id)}
+            >
+              Delete Project
+            </button>
           </div>
         </div>
       );

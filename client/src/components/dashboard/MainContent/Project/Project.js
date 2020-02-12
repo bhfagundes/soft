@@ -93,7 +93,6 @@ class Project extends Component {
 
   render() {
     const { tasks } = this.props.tasks;
-
     let tasksList = tasks.map((task, index) => (
       <div className="task-input" key={task._id}>
         <i
@@ -149,12 +148,12 @@ class Project extends Component {
 
     if (
       this.props.project &&
-      this.props.project.teamMembers &&
       !this.props.projects.projectLoading &&
       !this.props.tasks.tasksLoading
     ) {
+      console.log(this.props.project);
       const { project } = this.props;
-
+      alert(this.props.project.projectName);
       return (
         <div className="main-content">
           <h1 className="project-header">{project.name}</h1>
@@ -170,7 +169,6 @@ class Project extends Component {
           >
             Edit Project Info
           </button>
-
           <div className="modal-wrapper">
             <Modal
               onClose={this.toggleModal}

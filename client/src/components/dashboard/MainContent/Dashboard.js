@@ -35,19 +35,22 @@ class Dashboard extends Component {
 
   render() {
     const { projects } = this.props.projects;
-    let tamanho = 0;
-    let content;
-    let projects_aux = Object.values(projects);
-    let projectData = "";
-    if (projects_aux[0] === true) {
-      tamanho = projects_aux[1].length;
-      console.log(projects_aux[1][0].name);
 
-      projectData = projects_aux[1].sort().map(project => (
+    let content;
+    let projectData = "";
+    console.log(projects);
+    if (projects) {
+      projectData = projects.sort().map(project => (
         <div
           key={project._id}
           className="project-icon"
-          onClick={() => this.props.history.push(`/projects/${project._id}`)}
+          onClick={this.toggleEditModal.bind(
+            this,
+            project.name,
+            project.teamMembers,
+            project._id,
+            project.owner
+          )}
         >
           <div className="project-name">{project.name}</div>
           <div
@@ -55,17 +58,17 @@ class Dashboard extends Component {
             onClick={this.toggleEditModal.bind(
               this,
               project.name,
-              project.description,
-              project._id
+              project.teamMembers,
+              project._id,
+              project.owner
             )}
           >
-            Edit project
+            Editar Categoria
           </div>
-          <div className="project-info-button">Go to project</div>
         </div>
       ));
     }
-    if (tamanho > 0) {
+    if (projects != null && projects.length > 0) {
       // At least one project
       content = (
         <>

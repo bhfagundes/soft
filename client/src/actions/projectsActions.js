@@ -13,7 +13,7 @@ import {
 // Create Project
 export const createProject = projectData => dispatch => {
   axios
-    .post("/api/projects/create", projectData)
+    .post("http://127.0.0.1:4000/api/projects/create", projectData)
     .then(res =>
       dispatch({
         type: CREATE_PROJECT,
@@ -54,7 +54,7 @@ export const deleteProject = (id, history) => dispatch => {
 export const getProject = id => dispatch => {
   dispatch(setProjectLoading());
   axios
-    .get(`/api/projects/${id}`)
+    .get(`http://127.0.0.1:4000/api/projects/${id}`)
     .then(res =>
       dispatch({
         type: GET_PROJECT,
@@ -73,7 +73,7 @@ export const getProject = id => dispatch => {
 export const getProjects = () => dispatch => {
   dispatch(setProjectsLoading());
   axios
-    .get("/api/projects")
+    .get("http://127.0.0.1:4000/api/projects")
     .then(res =>
       dispatch({
         type: GET_PROJECTS,

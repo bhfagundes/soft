@@ -7,15 +7,20 @@ import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
 // Register User
 export const registerUser = (userData, history) => dispatch => {
   axios
-    .post("http://localhost:3000/api/register", userData)
+    .post("/api/users/register", userData)
     .then(res => history.push("/"))
-    .catch(err => alert(err));
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
 };
 
 // Login - get user token
 export const loginUser = userData => dispatch => {
   axios
-    .post("http://localhost:3000/api/login", userData)
+    .post("/api/users/login", userData)
     .then(res => {
       // Save to localStorage
 

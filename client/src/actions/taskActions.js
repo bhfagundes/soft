@@ -11,7 +11,7 @@ import {
 // Create Task
 export const createTask = taskData => dispatch => {
   axios
-    .post("/api/tasks/create", taskData)
+    .post("http://127.0.0.1:4000/api/tasks/create", taskData)
     .then(res =>
       dispatch({
         type: CREATE_TASK,
@@ -25,7 +25,7 @@ export const createTask = taskData => dispatch => {
 export const getTasks = id => dispatch => {
   dispatch(setTasksLoading());
   axios
-    .get(`/api/tasks/${id}`)
+    .get(`http://127.0.0.1:4000/api/tasks/${id}`)
     .then(res =>
       dispatch({
         type: GET_TASKS,

@@ -10,11 +10,9 @@ import {
   withRouter
 } from "react-router-dom";
 
-import Spinner from "../common/Spinner";
 import SideNav from "./SideNav/SideNav";
 import TopNav from "./TopNav/TopNav";
 import Dashboard from "./MainContent/Dashboard";
-import Tasks from "./MainContent/Tasks";
 import Project from "./MainContent/Project/Project";
 import NotFound from "../404/404";
 
@@ -26,7 +24,7 @@ class Layout extends Component {
   }
 
   render() {
-    const { projects, projectsLoading } = this.props.projects;
+    const { projects } = this.props.projects;
 
     let dashboardContent;
 
@@ -42,12 +40,6 @@ class Layout extends Component {
                 path="/dashboard"
                 projects={projects}
                 component={Dashboard}
-              />
-              <Route
-                exact
-                path="/tasks"
-                projects={projects}
-                component={Tasks}
               />
               <Route exact path="/projects/:project" component={Project} />
               <Route component={NotFound} />
@@ -68,7 +60,6 @@ class Layout extends Component {
                 projects={[]}
                 component={Dashboard}
               />
-              <Route exact path="/tasks" component={Tasks} />
               <Route component={NotFound} />
             </Switch>
           </div>

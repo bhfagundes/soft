@@ -13,6 +13,8 @@ class Dashboard extends Component {
     name: "",
     members: [],
     id: "",
+    status: "",
+    department: "",
     owner: {}
   };
 
@@ -20,7 +22,7 @@ class Dashboard extends Component {
     this.setState({ modal: !this.state.modal, edit: false });
   };
 
-  toggleEditModal = (name, members, id, owner, e) => {
+  toggleEditModal = (name, members, id, owner, status, department, e) => {
     e.stopPropagation();
 
     this.setState({
@@ -28,6 +30,8 @@ class Dashboard extends Component {
       edit: !this.state.edit,
       name: name,
       members: members,
+      status: status,
+      department: department,
       id: id,
       owner: owner
     });
@@ -38,7 +42,6 @@ class Dashboard extends Component {
 
     let content;
     let projectData = "";
-    console.log(projects);
     if (projects) {
       projectData = projects.sort().map(project => (
         <div
@@ -47,6 +50,8 @@ class Dashboard extends Component {
           onClick={this.toggleEditModal.bind(
             this,
             project.name,
+            project.status,
+            project.department,
             project.teamMembers,
             project._id,
             project.owner
@@ -60,10 +65,12 @@ class Dashboard extends Component {
               project.name,
               project.teamMembers,
               project._id,
+              project.status,
+              project.department,
               project.owner
             )}
           >
-            Editar Categoria
+            Editar Projeto
           </div>
         </div>
       ));
@@ -73,7 +80,7 @@ class Dashboard extends Component {
       content = (
         <>
           <button className="main-btn" onClick={this.toggleModal}>
-            Create another project
+            Criar outro projeto
           </button>
           <div className="modal-wrapper">
             <Modal
@@ -81,6 +88,8 @@ class Dashboard extends Component {
               modal={this.state.modal}
               edit={this.state.edit}
               name={this.state.name}
+              department={this.state.department}
+              status={this.state.department}
               members={this.state.members}
               id={this.state.id}
               owner={this.state.owner}
@@ -95,9 +104,9 @@ class Dashboard extends Component {
         <>
           <div className="projects">
             <div className="no-projects">
-              <h1 className="header">You have no projects</h1>
+              <h1 className="header">Não há projetos cadastrados</h1>
               <button className="main-btn" onClick={this.toggleModal}>
-                Create your first project
+                Criar projeto
               </button>
               <div className="modal-wrapper">
                 <Modal onClose={this.toggleModal} modal={this.state.modal} />

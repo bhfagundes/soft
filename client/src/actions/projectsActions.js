@@ -26,7 +26,7 @@ export const createProject = projectData => dispatch => {
 // Update Project
 export const updateProject = projectData => dispatch => {
   axios
-    .patch("/api/projects/update", projectData)
+    .patch("http://127.0.0.1:4000/api/projects/update", projectData)
     .then(res =>
       dispatch({
         type: UPDATE_PROJECT,
@@ -39,7 +39,7 @@ export const updateProject = projectData => dispatch => {
 // Delete Project
 export const deleteProject = (id, history) => dispatch => {
   axios
-    .delete(`/api/projects/delete/${id}`)
+    .delete("http://127.0.0.1:4000//api/projects/delete/${id}")
     .then(res =>
       dispatch({
         type: DELETE_PROJECT,

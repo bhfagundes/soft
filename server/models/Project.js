@@ -7,23 +7,13 @@ const ProjectSchema = new Schema({
     type: String,
     required: true
   },
-  owner: {
-    type: Object,
+  status: {
+    type: String,
     required: true
   },
-  teamMembers: [
-    {
-      email: {
-        type: String
-      },
-      name: {
-        type: String
-      }
-    }
-  ],
-  date: {
-    type: Date,
-    default: Date.now
+  department: {
+    type: String,
+    required: true
   }
 });
 

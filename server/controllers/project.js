@@ -18,7 +18,7 @@ passport.authenticate("jwt", { session: false }),
         } else {
           return res.status(500).json({
             success: false,
-            error: "Nenhum projeto com este id cadastrado!"
+            error: "Nenhum projeto cadastrado!"
           });
         }
       })
@@ -31,36 +31,44 @@ passport.authenticate("jwt", { session: false }),
   });
 passport.authenticate("jwt", { session: false }),
   (createProject = async (req, res) => {
-    if (!req.body.members) {
-      err = "Nenhum usuário definido";
-      return res.status(400).json({ success: false, error: err });
-    }
-    let owner = req.body.members[0];
-    await User.find({ email: owner.email })
-      .then(user => {
-        if (!user) {
-          err = "Owner não encontrado";
-          return res.status(400).json({ success: false, error: err });
-        }
-        const OWNER = {
-          id: user.id,
-          name: user.name,
-          email: user.email
-        };
-        const NEW_PROJECT = new Project({
-          owner: OWNER,
-          name: req.body.projectName,
-          teamMembers: req.body.members
-        });
-        NEW_PROJECT.save()
-          .then(project => res.json(project))
-          .catch(err => console.log(err));
+    const NEW_PROJECT = new Project({
+      name: req.body.projectName,
+      department: req.body.department,
+      status: req.body.status
+    });
+    NEW_PROJECT.save()
+      .then(project => res.json(project))
+      .catch(err => console.log(err));
+  });
+
+passport.authenticate("jwt", { session: false }),
+  (updateProject = (req, res) => {
+    let projectFields = {};
+    projectFields.name = req.body.projectName;
+    projectFields.status = req.body.status;
+    projectFields.department = req.body.department;
+    Project.findOneAndUpdate(
+      { _id: req.body.id },
+      { $set: projectFields },
+      { new: true }
+    )
+      .then(project => {
+        res.json(project);
       })
       .catch(err => console.log(err));
+  });
+
+passport.authenticate("jwt", { session: false }),
+  (deleteProject = (req, res) => {
+    Project.findById(req.params.id).then(project => {
+      project.remove().then(() => res.json({ success: true }));
+    });
   });
 
 module.exports = {
   getProjects,
   getProject,
-  createProject
+  createProject,
+  updateProject,
+  deleteProject
 };

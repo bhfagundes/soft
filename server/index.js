@@ -8,9 +8,14 @@ const routesRouter = require("./routes/routes");
 const app = express();
 const apiPort = 4000;
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
+app.use(
+  bodyParser.urlencoded({
+    extended: false
+  })
+);
 app.use(bodyParser.json());
+
+app.use(cors());
 
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 

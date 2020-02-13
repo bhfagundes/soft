@@ -43,6 +43,7 @@ passport.authenticate("jwt", { session: false }),
 
 passport.authenticate("jwt", { session: false }),
   (updateProject = (req, res) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
     let projectFields = {};
     projectFields.name = req.body.projectName;
     projectFields.status = req.body.status;
@@ -60,6 +61,7 @@ passport.authenticate("jwt", { session: false }),
 
 passport.authenticate("jwt", { session: false }),
   (deleteProject = (req, res) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
     Project.findById(req.params.id).then(project => {
       project.remove().then(() => res.json({ success: true }));
     });

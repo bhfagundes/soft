@@ -9,6 +9,6 @@ router.get("/users", UserController.getUsers);
 router.get("/projects", ProjectController.getProjects);
 router.get("/projects/:id", ProjectController.getProjects);
 router.post("/projects/create", ProjectController.createProject);
-router.patch("projects/update", ProjectController.updateProjects);
+router.patch("projects/update", ProjectController.updateProject);
 router.delete("projects/delete/:id", ProjectController.deleteProject);
 module.exports = router;
